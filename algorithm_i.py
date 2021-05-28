@@ -27,3 +27,11 @@ class Clause:
                 return True
 
         return False
+
+
+def main():
+    print("Algorithm I")
+
+
+if __name__ == '__main__':
+    main()
