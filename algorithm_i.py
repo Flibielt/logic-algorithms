@@ -29,8 +29,18 @@ class Clause:
         return False
 
 
-def main():
+def algorithm_i(clauses, n):
     print("Algorithm I")
+    m = len(clauses)
+    d = 0
+
+    if d == n:
+        return True
+
+
+def main():
+    clauses = []
+    algorithm_i(clauses, 5)
 
 
 if __name__ == '__main__':
