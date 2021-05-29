@@ -30,7 +30,7 @@ If there is a falsified clause, then the index of the last clause
 #### I5
 Resolution
 
-# Theorems
+## Theorems
 ### Literal
 A literal is an atomic formula or its negation.
 
@@ -42,5 +42,5 @@ Two literals are strictly distinct if they are distinct and moreover they are no
 ### Clause
 In logic, a **clause** is an expression formed from a finite collection of literals (atoms or their negations). A clause is true either whenever at least one of the literals that form it is true (a disjunctive clause, the most common use of the term), or when all the literals that form it are true (a conjunctive clause, a less common use of the term).
 
-## Resolution
+### Resolution
 The idea of Propositional Resolution is simple. Suppose we have the clause {p, q}. In other words, we know that p is true or q is true. Suppose we also have the clause {¬q, r}. In other words, we know that q is false or r is true. One clause contains q, and the other contains ¬q. If q is false, then by the first clause p must be true. If q is true, then, by the second clause, r must be true. Since q must be either true or false, then it must be the case that either p is true or r is true. So we should be able to derive the clause {p, r}.
