@@ -5,6 +5,12 @@ class Literal:
     def __init__(self, value):
         self.value = value
 
+    def __eq__(self, other):
+        if isinstance(other, Literal):
+            if self.value == other.value:
+                return True
+        return False
+
     def is_true(self):
         return self.value > 0
 
@@ -50,6 +56,21 @@ def find_falsified_clause(clauses, literals):
     return -1
 
 
+def resolution(clause1, clause2):
+    literals1 = clause1.literals
+    literals2 = clause2.literals
+    resolution_literals = []
+
+    for l1 in literals1:
+        for l2 in literals2:
+            if l1.value + l2.value != 0:
+                resolution_literals.append(l1)
+
+    unique_literals = set(resolution_literals)
+
+    return Clause(unique_literals)
+
+
 def algorithm_i(clauses, n):
     print("Algorithm I")
     m = len(clauses)
@@ -57,7 +78,7 @@ def algorithm_i(clauses, n):
     d = 0
 
     while True:
-        # I2: Advanced
+        # I2: Advance
         if d == n:
             return True
         else:
@@ -70,12 +91,21 @@ def algorithm_i(clauses, n):
         # I3: Find falsified C_i
         i = find_falsified_clause(clauses, literals)
         while i > -1:
-            # I4: Negate l_d and search for falsified clauses
+            # I4: Negate l_d and search for falsified clauses (C_j)
             literals[d] = -1 * literals[d]
             j = find_falsified_clause(clauses, literals)
 
             if j < 0:
                 break
+
+            # I5: Resolution
+            resolution_clause = resolution(clauses[i], clauses[j])
+            if len(resolution_clause.literals) == 0:
+                return False
+            else:
+                clauses.append(resolution_clause)
+                m = len(clauses)
+                i = m
 
 
 def main():
