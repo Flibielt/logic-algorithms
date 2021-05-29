@@ -42,8 +42,17 @@ class DominoCircle:
                     break
                 index = index + 1
 
-            if equal:
-                return True
+            # If not equals, then compare the two circles in the opposite direction
+            if not equal:
+                index = 0
+                equal = True
+                for other_index in range(first_domino_index, first_domino_index - len(self.array), -1):
+                    if not self.array[index].__eq__(other.array[other_index % len(self.array)]):
+                        equal = False
+                        break
+                    index = index + 1
+
+            return equal
 
 
 def generate_domino():
