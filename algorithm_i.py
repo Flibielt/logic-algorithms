@@ -77,6 +77,7 @@ def algorithm_i(clauses, n):
     literals = []
     d = 0
 
+    # todo: Generate x1, ..., xn values, there will be the values for the literals
     while True:
         # I2: Advance
         if d == n:
@@ -106,6 +107,7 @@ def algorithm_i(clauses, n):
                 clauses.append(resolution_clause)
                 m = len(clauses)
                 i = m
+                # todo: Update d with some value
 
 
 def main():
