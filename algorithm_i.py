@@ -1,4 +1,4 @@
-from random import randrange
+import random
 
 
 class Literal:
@@ -71,21 +71,20 @@ def resolution(clause1, clause2):
     return Clause(unique_literals)
 
 
-def algorithm_i(clauses, n):
+def algorithm_i(clauses, n, x):
     print("Algorithm I")
     m = len(clauses)
     literals = []
     d = 0
 
-    # todo: Generate x1, ..., xn values, there will be the values for the literals
     while True:
         # I2: Advance
         if d == n:
             return True
         else:
-            l_d = randrange(-10, 11)
+            l_d = random.choice(x)
             while not is_strictly_distinct(literals, l_d):
-                l_d = randrange(-10, 11)
+                l_d = random.choice(x)
             literals.append(l_d)
             d = d + 1
 
@@ -110,9 +109,22 @@ def algorithm_i(clauses, n):
                 # todo: Update d with some value
 
 
+def create_x(count):
+    x = []
+
+    for i in range(-count, 0):
+        x.append(i)
+
+    for i in range(1, count + 1):
+        x.append(i)
+
+    return x
+
+
 def main():
     clauses = []
-    algorithm_i(clauses, 5)
+    x = create_x(10)
+    algorithm_i(clauses, 5, x)
 
 
 if __name__ == '__main__':
