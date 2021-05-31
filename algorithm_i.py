@@ -38,6 +38,14 @@ class Clause:
         return False
 
 
+def create_clauses(clause_inputs):
+    clauses = []
+
+    for clause_input in clause_inputs:
+        clauses.append(Clause(clause_input))
+
+    return clauses
+
 def is_strictly_distinct(literals, new_literal):
     for literal in literals:
         if literal.value == new_literal:
@@ -73,7 +81,7 @@ def resolution(clause1, clause2):
 
 def algorithm_i(clauses, n, x):
     print("Algorithm I")
-    m = len(clauses)
+    len(clauses)
     literals = []
     d = 0
 
@@ -95,6 +103,7 @@ def algorithm_i(clauses, n, x):
             literals[d] = -1 * literals[d]
             j = find_falsified_clause(clauses, literals)
 
+            # No falsified clause was found, return to I2
             if j < 0:
                 break
 
@@ -106,7 +115,12 @@ def algorithm_i(clauses, n, x):
                 clauses.append(resolution_clause)
                 m = len(clauses)
                 i = m
-                # todo: Update d with some value
+
+                max_t = 0
+                for t in range(0, len(literals)):
+                    if -literals[t] in clauses[m].literals:
+                        max_t = t
+                d = max_t
 
 
 def create_x(count):
@@ -122,7 +136,18 @@ def create_x(count):
 
 
 def main():
-    clauses = []
+    clause_inputs = [
+        [1, 2, 3, 4, 5],
+        [1, 2, 3, 4, -5],
+        [1, 2, 3, -4, 5],
+        [1, 2, -3, 4, 5],
+        [1, -2, 3, 4, 5],
+        [-5],
+        [-4],
+        [-3],
+        [-2]
+    ]
+    clauses = create_clauses(clause_inputs)
     x = create_x(10)
     algorithm_i(clauses, 5, x)
 
