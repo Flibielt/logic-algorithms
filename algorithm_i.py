@@ -17,7 +17,7 @@ class Literal:
     def is_satisfied_by(self, x):
         value = abs(self.value)
 
-        if (x[value - 1] and not self.is_true()) or (not x[value - 1] and self.is_true()):
+        if (x[0] and not self.is_true()) or (not x[0] and self.is_true()):
             return False
 
         return True
@@ -46,6 +46,7 @@ def create_clauses(clause_inputs):
 
     return clauses
 
+
 def is_strictly_distinct(literals, new_literal):
     for literal in literals:
         if literal.value == new_literal:
@@ -58,25 +59,24 @@ def is_strictly_distinct(literals, new_literal):
 
 def find_falsified_clause(clauses, literals):
     for i in range(0, len(clauses)):
-        for literal in literals:
-            if not clauses[i].is_satisfied_by(literal):
-                return i
+        if not clauses[i].is_satisfied_by(literals):
+            return i
     return -1
 
 
 def resolution(clause1, clause2):
     literals1 = clause1.literals
     literals2 = clause2.literals
-    resolution_literals = []
+    resolution_literal_values = []
 
     for l1 in literals1:
         for l2 in literals2:
             if l1.value + l2.value != 0:
-                resolution_literals.append(l1)
+                resolution_literal_values.append(l1.value)
 
-    unique_literals = set(resolution_literals)
+    unique_literal_values = set(resolution_literal_values)
 
-    return Clause(unique_literals)
+    return Clause(unique_literal_values)
 
 
 def algorithm_i(clauses, n, x):
@@ -100,7 +100,7 @@ def algorithm_i(clauses, n, x):
         i = find_falsified_clause(clauses, literals)
         while i > -1:
             # I4: Negate l_d and search for falsified clauses (C_j)
-            literals[d] = -1 * literals[d]
+            literals[d - 1] = -1 * literals[d - 1]
             j = find_falsified_clause(clauses, literals)
 
             # No falsified clause was found, return to I2
@@ -113,7 +113,7 @@ def algorithm_i(clauses, n, x):
                 return False
             else:
                 clauses.append(resolution_clause)
-                m = len(clauses)
+                m = len(clauses) - 1
                 i = m
 
                 max_t = 0
