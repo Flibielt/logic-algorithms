@@ -15,8 +15,6 @@ class Literal:
         return self.value > 0
 
     def is_satisfied_by(self, x):
-        value = abs(self.value)
-
         if (x[0] and not self.is_true()) or (not x[0] and self.is_true()):
             return False
 
@@ -49,9 +47,9 @@ def create_clauses(clause_inputs):
 
 def is_strictly_distinct(literals, new_literal):
     for literal in literals:
-        if literal.value == new_literal:
+        if literal == new_literal:
             return False
-        elif abs(literal.value) == abs(new_literal):
+        elif abs(literal) == abs(new_literal):
             return False
 
     return True
@@ -88,7 +86,7 @@ def algorithm_i(clauses, n, x):
     while True:
         # I2: Advance
         if d == n:
-            return True
+            return literals
         else:
             l_d = random.choice(x)
             while not is_strictly_distinct(literals, l_d):
@@ -110,7 +108,7 @@ def algorithm_i(clauses, n, x):
             # I5: Resolution
             resolution_clause = resolution(clauses[i], clauses[j])
             if len(resolution_clause.literals) == 0:
-                return False
+                return []
             else:
                 clauses.append(resolution_clause)
                 m = len(clauses) - 1
@@ -141,15 +139,16 @@ def main():
         [1, 2, 3, 4, -5],
         [1, 2, 3, -4, 5],
         [1, 2, -3, 4, 5],
-        [1, -2, 3, 4, 5],
-        [-5],
-        [-4],
-        [-3],
-        [-2]
+        [1, -2, 3, 4, 5]
     ]
     clauses = create_clauses(clause_inputs)
     x = create_x(10)
-    algorithm_i(clauses, 5, x)
+    result = algorithm_i(clauses, 5, x)
+
+    if len(result) > 0:
+        print("Result: " + str(result))
+    else:
+        print("Unsatisfiable")
 
 
 if __name__ == '__main__':
