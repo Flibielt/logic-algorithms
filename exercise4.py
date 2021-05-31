@@ -126,3 +126,20 @@ def function(a, b, index):
     elif index == 16:
         # return True
         return T
+
+
+def main():
+    values = [[True, True], [True, False], [False, True], [False, False]]
+
+    for i in range(0, 4):
+        print("A: " + str(values[i][0]) + ", B: " + str(values[i][1]))
+        for j in range(1, 17):
+            print(str(j), end="\t\t")
+        print()
+        for j in range(1, 17):
+            print(str(function(values[i][0], values[i][1], j)), end="\t")
+        print()
+
+
+if __name__ == '__main__':
+    main()
