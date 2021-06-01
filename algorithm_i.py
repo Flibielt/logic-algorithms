@@ -15,7 +15,11 @@ class Literal:
         return self.value > 0
 
     def is_satisfied_by(self, x):
-        if (x[0] and not self.is_true()) or (not x[0] and self.is_true()):
+        index = abs(self.value) - 1
+        if index >= len(x):
+            return True
+
+        if (x[index] and not self.is_true()) or (not x[index] and self.is_true()):
             return False
 
         return True
