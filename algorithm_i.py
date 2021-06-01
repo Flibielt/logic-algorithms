@@ -39,6 +39,13 @@ class Clause:
 
         return False
 
+    def get_literals(self):
+        literal_values = []
+        for literal in self.literals:
+            literal_values.append(literal.value)
+
+        return literal_values
+
 
 def create_clauses(clause_inputs):
     clauses = []
@@ -67,14 +74,20 @@ def find_falsified_clause(clauses, literals):
 
 
 def resolution(clause1, clause2):
-    literals1 = clause1.literals
-    literals2 = clause2.literals
+    literals1 = set(clause1.get_literals())
+    literals2 = set(clause2.get_literals())
     resolution_literal_values = []
 
-    for l1 in literals1:
-        for l2 in literals2:
-            if l1.value + l2.value != 0:
-                resolution_literal_values.append(l1.value)
+    changed = True
+    while changed:
+        changed = False
+        for l1 in literals1:
+            for l2 in literals2:
+                if l1 + l2 == 0:
+                    literals1.remove(l1)
+                    literals2.remove(l2)
+                    changed = True
+                    break
 
     unique_literal_values = set(resolution_literal_values)
 
