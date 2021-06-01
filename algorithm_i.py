@@ -151,16 +151,15 @@ def create_x(count):
 
 
 def main():
+    n = 3
     clause_inputs = [
-        [1, 2, 3, 4, 5],
-        [1, 2, 3, 4, -5],
-        [1, 2, 3, -4, 5],
-        [1, 2, -3, 4, 5],
-        [1, -2, 3, 4, 5]
+        [1, 2, 3],
+        [-1, 2, 3],
+        [1, -2, -3]
     ]
     clauses = create_clauses(clause_inputs)
     x = create_x(10)
-    result = algorithm_i(clauses, 5, x)
+    result = algorithm_i(clauses, n, x)
 
     if len(result) > 0:
         print("Result: " + str(result))
