@@ -39,6 +39,9 @@ For a literal *l*, the complementary literal is a literal corresponding to the n
 ### Strictly distinct literals
 Two literals are strictly distinct if they are distinct and moreover they are not complementary one to the other. We say that a set of literals is strictly distinct if it does not contain two complementary literals.
 
+The clauses values are indexes, if they are in absolute values. 
+If the number is negative, then the values with that index should be false, if it's a positive number, then it should be true.
+
 ### Clause
 In logic, a **clause** is an expression formed from a finite collection of literals (atoms or their negations). A clause is true either whenever at least one of the literals that form it is true (a disjunctive clause, the most common use of the term), or when all the literals that form it are true (a conjunctive clause, a less common use of the term).
 
