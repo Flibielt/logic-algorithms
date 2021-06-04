@@ -14,7 +14,10 @@ def function(a, b, index):
         if a:
             if b:
                 return True
-        return False
+            else:
+                return False
+        else:
+            return False
     elif index == 3:
         # return a and not b
         if a:
@@ -22,7 +25,8 @@ def function(a, b, index):
                 return False
             else:
                 return True
-        return False
+        else:
+            return False
     elif index == 4:
         # return a
         return a
@@ -33,7 +37,8 @@ def function(a, b, index):
         else:
             if b:
                 return True
-        return False
+            else:
+                return False
     elif index == 6:
         # return b
         return b
@@ -56,7 +61,8 @@ def function(a, b, index):
         else:
             if b:
                 return True
-        return False
+            else:
+                return False
     elif index == 9:
         # return not (a or b)
         if a:
@@ -113,7 +119,8 @@ def function(a, b, index):
         if a:
             if b:
                 return False
-        return True
+        else:
+            return True
     elif index == 16:
         # return True
         return T
